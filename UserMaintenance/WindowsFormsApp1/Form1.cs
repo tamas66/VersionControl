@@ -30,8 +30,8 @@ namespace WindowsFormsApp1
         {
             var u = new User()
             {
-                LastName = txtLastName.Text,
-                FirstName = txtFirstName.Text
+                LastName = textBox1.Text,
+                FirstName = textBox2.Text
             };
             users.Add(u);
         }
