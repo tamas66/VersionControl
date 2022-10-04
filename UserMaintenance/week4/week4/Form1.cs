@@ -145,6 +145,7 @@ namespace week4
             headerRange.RowHeight = 40;
             headerRange.Interior.Color = Color.LightBlue;
             headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+            //header hivatkozás miatt még rá kell nézni
         }
 
     }
