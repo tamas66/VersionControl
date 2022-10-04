@@ -85,6 +85,8 @@ namespace week4
                 xlSheet.Cells[1, 1] = headers[0];
             }
             object[,] values = new object[Flats.Count, headers.Length];
+            string price;
+            string quadro;
             int counter = 0;
             foreach (Flat f in Flats)
             {
@@ -104,12 +106,16 @@ namespace week4
                 values[counter, 5] = f.NumberOfRooms;
                 values[counter, 6] = f.FloorArea;
                 values[counter, 7] = f.Price;
-                values[counter, 8] = "=";
+
+                price = GetCell(counter, 7);
+                quadro = GetCell(counter, 6);
+                values[counter, 8] = $"={price}/{quadro}";
                 counter++;
             }
             xlSheet.get_Range(
              GetCell(2, 1),
              GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
+            FormatTable();
         }
 
    
@@ -128,6 +134,17 @@ namespace week4
             ExcelCoordinate += x.ToString();
 
             return ExcelCoordinate;
+        }
+        public void FormatTable()
+        {
+            Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
+            headerRange.Font.Bold = true;
+            headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            headerRange.EntireColumn.AutoFit();
+            headerRange.RowHeight = 40;
+            headerRange.Interior.Color = Color.LightBlue;
+            headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
         }
 
     }
