@@ -27,6 +27,7 @@ namespace week4
         {
             InitializeComponent();
             LoadData();
+            CreateExcel();
 
         }
         private void LoadData()
@@ -82,7 +83,7 @@ namespace week4
             };
             for (int i = 0; i < headers.Length; i++)
             {
-                xlSheet.Cells[1, 1] = headers[0];
+                xlSheet.Cells[1, i+1] = headers[i];
             }
             object[,] values = new object[Flats.Count, headers.Length];
             string price;
@@ -107,15 +108,23 @@ namespace week4
                 values[counter, 6] = f.FloorArea;
                 values[counter, 7] = f.Price;
 
-                price = GetCell(counter, 7);
-                quadro = GetCell(counter, 6);
+                price = GetCell(counter+2, 8);
+                quadro = GetCell(counter+2, 7);
                 values[counter, 8] = $"={price}/{quadro}";
                 counter++;
             }
             xlSheet.get_Range(
              GetCell(2, 1),
              GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
-            FormatTable();
+            //FormatTable();
+            Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
+            headerRange.Font.Bold = true;
+            headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            headerRange.EntireColumn.AutoFit();
+            headerRange.RowHeight = 40;
+            headerRange.Interior.Color = Color.LightBlue;
+            headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
         }
 
    
@@ -135,18 +144,18 @@ namespace week4
 
             return ExcelCoordinate;
         }
-        public void FormatTable()
-        {
-            Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
-            headerRange.Font.Bold = true;
-            headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
-            headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
-            headerRange.EntireColumn.AutoFit();
-            headerRange.RowHeight = 40;
-            headerRange.Interior.Color = Color.LightBlue;
-            headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+        //public void FormatTable()
+        //{
+            //Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
+            //headerRange.Font.Bold = true;
+            //headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            //headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            //headerRange.EntireColumn.AutoFit();
+            //headerRange.RowHeight = 40;
+            //headerRange.Interior.Color = Color.LightBlue;
+            //headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
             //header hivatkozás miatt még rá kell nézni
-        }
+        //}
 
     }
 }
