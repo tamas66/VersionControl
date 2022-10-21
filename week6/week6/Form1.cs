@@ -32,10 +32,10 @@ namespace week6
             var xml = new XmlDocument();
             xml.LoadXml(result);
 
-            foreach (XmlElement element in xml.DocumentElement)
+            foreach (XmlElement element in xml.DocumentElement.ChildNodes[0])
             {
-                var childElement = (XmlElement)element;
-                var currency = childElement.GetAttribute("Curr").ToString();
+                
+                var currency = element.InnerText;
 
                 Currencies.Add(currency);
                 // Valuta
