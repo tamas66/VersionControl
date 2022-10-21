@@ -22,8 +22,9 @@ namespace week6
         public Form1()
         {
             InitializeComponent();
-            bindingSource1.DataSource = Rates;
-            bindingSource2.DataSource = Currencies;
+            dataGridView1.DataSource = Rates;
+            comboBox1.DataSource = Currencies;
+
             var mnbService = new MNBArfolyamServiceSoapClient();
             var request = new GetCurrenciesRequestBody();
             var response = mnbService.GetCurrencies(request);
@@ -31,7 +32,26 @@ namespace week6
             var xml = new XmlDocument();
             xml.LoadXml(result);
 
-            RefreshData();
+            foreach (XmlElement element in xml.DocumentElement)
+            {
+                var childElement = (XmlElement)element;
+                var currency = childElement.GetAttribute("Curr").ToString();
+
+                Currencies.Add(currency);
+                // Valuta
+                // var childElement = (XmlElement)element.ChildNodes[0];
+                //currency.Currency = childElement.GetAttribute("curr");
+                //if (childElement == null)
+                //   continue;
+
+                // Érték
+                //var unit = decimal.Parse(childElement.GetAttribute("unit"));
+                //var value = decimal.Parse(childElement.InnerText);
+                //if (unit != 0)
+                //  currency.Value = value / unit;
+            }
+
+                RefreshData();
         }
 
         private void RefreshData()
@@ -63,9 +83,10 @@ namespace week6
 
                 // Valuta
                 var childElement = (XmlElement)element.ChildNodes[0];
-                rate.Currency = childElement.GetAttribute("curr");
                 if (childElement == null)
                     continue;
+                rate.Currency = childElement.GetAttribute("curr");
+                
 
                 // Érték
                 var unit = decimal.Parse(childElement.GetAttribute("unit"));
