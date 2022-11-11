@@ -41,8 +41,8 @@ namespace week07
 
             var nyereségekRendezve = (from x in Nyereségek
                                       orderby x
-                                      select x)
-                                        .ToList();
+                                      select x).ToList();
+
             MessageBox.Show(nyereségekRendezve[nyereségekRendezve.Count() / 5].ToString());
 
             SaveChanges();        
@@ -62,10 +62,8 @@ namespace week07
             foreach (var item in Portfolio)
             {
                 var last = (from x in Ticks
-                            where item.Index == x.Index.Trim()
-                               && date <= x.TradingDay
-                            select x)
-                            .First();
+                            where item.Index == x.Index.Trim() && date <= x.TradingDay
+                            select x).First();
                 value += (decimal)last.Price * item.Volume;
             }
             return value;
