@@ -9,6 +9,5 @@ namespace week6._2.Abstractions
     public interface IToyFactory
     {
         Toy CreateNew();
-
     }
 }
