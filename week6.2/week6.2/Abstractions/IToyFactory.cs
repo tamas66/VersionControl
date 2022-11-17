@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace week6._2.Abstractions
 {
-    internal interface IToyFactory
+    public interface IToyFactory
     {
+        Toy CreateNew();
+
     }
 }

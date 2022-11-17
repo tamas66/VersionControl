@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using week6._2.Abstractions;
 
 namespace week6._2.Entities
 {
-    internal class BallFactory
+    public class BallFactory : IToyFactory
     {
+        public Toy CreateNew()
+        {
+            return new Ball();
+        }
     }
 }
