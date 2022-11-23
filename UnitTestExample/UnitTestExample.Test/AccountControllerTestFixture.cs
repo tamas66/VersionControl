@@ -32,7 +32,8 @@ namespace UnitTestExample.Test
         }
         [
             Test,
-            TestCase("^(.{0, 7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$)", false)
+            TestCase("abcd1234", false),
+            TestCase("abCd12.34", true)
         ]
         public void TestValidatePassword(string password, bool expectedResult)
         {
@@ -46,11 +47,11 @@ namespace UnitTestExample.Test
             Assert.AreEqual(expectedResult, actualResult);
         }
 
-        [
-            Test,
-            TestCase("irf@uni-corvinus.hu", "Abcd1234"),
-            TestCase("irf@uni-corvinus.hu", "Abcd1234567"),
-        ]
+       // [
+         //   Test,
+           // TestCase("irf@uni-corvinus.hu", "Abcd1234"),
+            //TestCase("irf@uni-corvinus.hu", "Abcd1234567"),
+        //]
         public void TestRegisterHappyPath(string email, string password)
         {
             // Arrange
