@@ -81,20 +81,6 @@ namespace UnitTestExample.Test
         public void TestRegisterValidateException(string email, string password)
         {
             // Arrange
-            var accountController = new AccountController();
-
-            // Act
-            try
-            {
-                var actualResult = accountController.Register(email, password);
-                Assert.Fail();
-            }
-            catch (Exception ex)
-            {
-                Assert.IsInstanceOf<ValidationException>(ex);
-            }
-
-            // Assert
             var accountServiceMock = new Mock<IAccountManager>(MockBehavior.Strict);
             accountServiceMock
                 .Setup(m => m.CreateAccount(It.IsAny<Account>()))
@@ -110,10 +96,11 @@ namespace UnitTestExample.Test
             Assert.AreEqual(password, actualResult.Password);
             Assert.AreNotEqual(Guid.Empty, actualResult.ID);
             accountServiceMock.Verify(m => m.CreateAccount(actualResult), Times.Once);
+
         }
         [
     Test,
-    TestCase("irf@uni-corvinus.hu", "Abcd1234")
+    TestCase("irf@uni-corvinus.hu", "Abcd.1234")
 ]
         public void TestRegisterApplicationException(string newEmail, string newPassword)
         {
