@@ -71,7 +71,7 @@ namespace UnitTestExample.Test
 
         [
             Test,
-            TestCase("irf@uni-corvinus", "Abcd1234"),
+            TestCase("irf@uni-corvinus", "Abcd.1234"),
             TestCase("irf.uni-corvinus.hu", "Abcd1234"),
             TestCase("irf@uni-corvinus.hu", "abcd1234"),
             TestCase("irf@uni-corvinus.hu", "ABCD1234"),
