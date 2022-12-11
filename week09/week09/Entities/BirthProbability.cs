@@ -8,8 +8,9 @@ namespace week09.Entities
 {
     public class BirthProbability
     {
-        public int Kor { get; set; }
+        public int Age { get; set; }
         public int NbrOfChildren { get; set; }
         public double Probability { get; set; }
+        public Gender Gender { get; set; }
     }
 }
