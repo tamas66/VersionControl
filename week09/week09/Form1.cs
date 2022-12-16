@@ -30,7 +30,7 @@ namespace week09
 
         private void Simulation()
         {
-            for (int year = 2005; year <= 2024; year++)
+            for (int year = 2005; year <= 2005; year++)
             {
                 // Végigmegyünk az összes személyen
                 for (int i = 0; i < Population.Count; i++)
@@ -137,8 +137,8 @@ namespace week09
                     var line = sr.ReadLine().Split(';');
                     deathprobabilities.Add(new DeathProbability()
                     {
-                        Age = int.Parse(line[0]),
-                        NbrOfChildren = int.Parse(line[1]),
+                        Gender = (Gender)Enum.Parse(typeof(Gender), line[0]),
+                        Age = int.Parse(line[1]),
                         Probability = double.Parse(line[2])
                     });
                 }
